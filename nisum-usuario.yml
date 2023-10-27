@@ -1,0 +1,41 @@
+jwt:
+  expirationMs: '3600000'
+  secret: gSq2W5iPWQolLwgzoUj8Nv6unRoZf81gScvcu/nlI0nWKilKf2YyaTXELWQbLrNS0chsGfAmWx787NzVatBCXg==
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  health:
+    circuitbreakers:
+      enabled: 'true'
+  endpoint:
+    health:
+      show-details: always
+resilience4j:
+  circuitbreaker:
+    instances:
+      parameter:
+        slidingWindowSize: '5'
+        waitDurationInOpenState: 5s
+        permittedNumberOfCallsInHalfOpenState: '3'
+        failureRateThreshold: '5'
+        automaticTransitionFromOpenToHalfOpenEnabled: 'true'
+        slidingWindowType: COUNT_BASED
+        registerHealthIndicator: 'true'
+        eventConsumerBufferSize: '10'
+spring:
+  datasource:
+    driverClassName: org.h2.Driver
+    password: Ir]WWv@91264
+    username: appuserdb
+    url: jdbc:h2:mem:nisumdb
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: 'false'
+server:
+  port: '8083'
